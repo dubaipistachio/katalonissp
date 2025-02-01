@@ -7,7 +7,11 @@
    <containsHeaders>true</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>d84bc3e0-9273-4864-bbd2-732c4cc0d6a6</dataFileGUID>
+<<<<<<< HEAD
    <dataSourceUrl>/Users/caca/Downloads/LoginTestData (2).xlsx</dataSourceUrl>
+=======
+   <dataSourceUrl>C:\Users\zatih\Downloads\LoginTestData.xlsx</dataSourceUrl>
+>>>>>>> branch 'main' of https://github.com/dubaipistachio/katalonissp.git
    <driver>ExcelFile</driver>
    <isInternalPath>false</isInternalPath>
    <query></query>

@@ -9,9 +9,15 @@
    <freeLicense>false</freeLicense>
    <migratedVersion>5.9.0</migratedVersion>
    <modifiedEdition>ENTERPRISE</modifiedEdition>
+<<<<<<< HEAD
    <modifiedVersion>10.0.1</modifiedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
    <projectFileLocation>/Users/caca/Downloads/My First Web UI Project/My First Web UI Project.prj</projectFileLocation>
+=======
+   <modifiedVersion>10.1.0</modifiedVersion>
+   <pageLoadTimeout>0</pageLoadTimeout>
+   <projectFileLocation>C:\Users\zatih\Downloads\My First Web UI Project\My First Web UI Project\My First Web UI Project.prj</projectFileLocation>
+>>>>>>> branch 'main' of https://github.com/dubaipistachio/katalonissp.git
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>

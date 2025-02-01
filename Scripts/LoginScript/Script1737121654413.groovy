@@ -20,6 +20,7 @@ import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.testdata.reader.CsvDataFileReader
 
 // Definisi Test Data (Sesuaikan dengan path file Anda)
+<<<<<<< HEAD
 def testData = new CsvDataFileReader('Data Files/LoginData.csv')
 
 // Fungsi untuk login
@@ -89,6 +90,77 @@ WebUI.closeBrowser()
 //
 //// Definisi Test Data (Sebaiknya disimpan di Data Files - contoh: Excel, CSV)
 //TestData testData = findTestData('null') // Ganti dengan path data file Anda
+=======
+def testData = new CsvDataFileReader('Data Files/LoginTestData')
+
+// Fungsi untuk login
+@Keyword
+def login(String email, String password) {
+	WebUI.setText(findTestObject('Object Repository/Page_/input_Email'), email)
+	WebUI.setEncryptedText(findTestObject('Object Repository/Page_/input_Password'), password)
+	WebUI.click(findTestObject('Object Repository/Page_/btn_Login'))
+}
+
+// Fungsi untuk memverifikasi pesan error
+@Keyword
+def verifyErrorMessage(String expectedErrorMessage) {
+	WebUI.waitForElementVisible(findTestObject('Object Repository/Page_/lbl_ErrorMessage'), 5)
+	String actualErrorMessage = WebUI.getText(findTestObject('Object Repository/Page_/lbl_ErrorMessage'))
+	CustomKeywords.'customKeywords.verifyEqual'(actualErrorMessage, expectedErrorMessage, 'Pesan error tidak sesuai dengan yang diharapkan')
+}
+
+// Script Test Case
+WebUI.openBrowser('https://fe.pssi-dev.kecilin.id/login')
+
+// Loop melalui Test Data
+int rowCount = testData.findAll().size()
+
+for (int i = 1; i <= rowCount; i++) {
+	String email = testData.getValue(1, i)
+	String password = testData.getValue(2, i)
+	String valid = testData.getValue(3, i) // Mendapatkan nilai validitas dari data file
+	String expectedErrorMessage = testData.getValue(4, i) // Mendapatkan pesan error yang diharapkan
+
+	println("Pengujian dengan Email: " + email + ", Valid: " + valid)
+
+	login(email, password)
+
+	if (valid.equalsIgnoreCase("true")) {
+		// Email valid, verifikasi login berhasil
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/Page_/lbl_Dashboard'), FailureHandling.OPTIONAL)) {
+			println("Login berhasil untuk email valid: " + email)
+			WebUI.takeScreenshot()
+		} else {
+			println("Login *seharusnya* berhasil untuk email valid: " + email + ", tetapi gagal.")
+			WebUI.takeScreenshot()
+			// Tambahkan logika verifikasi pesan error jika diperlukan
+		}
+	} else {
+		// Email tidak valid, verifikasi pesan error
+		verifyErrorMessage(expectedErrorMessage)
+	}
+
+	WebUI.delay(2)
+	WebUI.navigateToUrl('https://fe.pssi-dev.kecilin.id/login')
+}
+
+WebUI.closeBrowser()
+
+
+
+
+
+
+//// Definisi Test Object (Sebaiknya disimpan di Object Repository)
+//TestObject txt_Email = findTestObject('Object Repository/Page_/input_Email') // Ganti dengan path object Anda
+//TestObject txt_Password = findTestObject('Object Repository/Page_/input_Password') // Ganti dengan path object Anda
+//TestObject btn_Login = findTestObject('Object Repository/Page_/button_Login') // Ganti dengan path object Anda
+//TestObject lbl_Dashboard = findTestObject('Object Repository/Page_/lbl_Dashboard') // Ganti dengan path object Anda (Untuk verifikasi)
+//TestObject lbl_ErrorMessage = findTestObject('Object Repository/Page_/lbl_ErrorMessage') //Ganti dengan path object anda (Untuk verifikasi pesan error)
+//
+//// Definisi Test Data (Sebaiknya disimpan di Data Files - contoh: Excel, CSV)
+//TestData testData = findTestData('Data Files/LoginTestData') // Ganti dengan path data file Anda
+>>>>>>> branch 'main' of https://github.com/dubaipistachio/katalonissp.git
 //
 //
 //@Keyword
